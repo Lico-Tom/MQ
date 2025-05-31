@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>performance-producer</module>
+        <module>performance-producer-http</module>
+        <module>performance-producer-common</module>
+        <module>performance-producer-kafka</module>
+        <module>performance-producer-pulsar</module>
+        <module>integration-test</module>
+        <module>performance-producer-rocketmq</module>
+        <module>performance-producer-postgre</module>
+        <module>performance-producer-mysql</module>
+        <module>performance-producer-es</module>
+        <module>performance-producer-redis</module>
+        <module>performance-producer-mongo</module>
+        <module>performance-producer-influx</module>
+        <module>performance-producer-mqtt</module>
+    </modules>
+
+    <parent>
+        <groupId>com.github.shoothzj</groupId>
+        <artifactId>java-dependency</artifactId>
+        <version>3.1.16</version>
+    </parent>
+
+    <artifactId>performance-producer-parent</artifactId>
+    <name>performance-producer-parent</name>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.shoothzj</groupId>
+            <artifactId>java-tool</artifactId>
+            <version>3.1.7</version>
+        </dependency>
+        <!-- test -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <configLocation>./ci/checkstyle/checkstyle.xml</configLocation>
+                    <suppressionsLocation>./ci/checkstyle/suppressions.xml</suppressionsLocation>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <encoding>UTF-8</encoding>
+                    <excludes>**/proto/*</excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>4.5.2.0</version>
+                <configuration>
+                    <xmlOutput>true</xmlOutput>
+                    <failOnError>false</failOnError>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
